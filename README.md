@@ -1,0 +1,1 @@
+To create scoped css modules, create a file named <name>.module.css, vite will take care of the rest
