@@ -13,8 +13,8 @@ export default function MenuEntry({ Feather_Icon, title, linkPath, onClose}) {
   );
 }
 
-MenuEntry.PropTypes = {
-    Feather_Icon: PropTypes.func.isRequired,
+MenuEntry.propTypes = {
+    Feather_Icon: PropTypes.any.isRequired,
     title: PropTypes.string.isRequired,
     linkPath: PropTypes.string.isRequired,
     onClose: PropTypes.func,

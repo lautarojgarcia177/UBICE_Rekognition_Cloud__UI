@@ -1,31 +1,12 @@
 import {
     Button,
-    FormControl,
-    FormErrorMessage,
-    FormLabel,
-    Input,
     Flex,
+    useToast
   } from "@chakra-ui/react";
-  import { Form, Formik, Field } from "formik";
+  import { Form, Formik } from "formik";
   import { Save as Feather_Icon_Save } from "react-feather";
   import { useEffect } from "react";
-  import { useToast } from "@chakra-ui/react";
-  
-  function ChakraUIFormField({ label, fieldName, validate }) {
-    return (
-      <Field name={fieldName} validate={validate}>
-        {({ field, form }) => (
-          <FormControl
-            isInvalid={form.errors[fieldName] && form.touched[fieldName]}
-          >
-            <FormLabel>{label}</FormLabel>
-            <Input {...field}></Input>
-            <FormErrorMessage>{form.errors[fieldName]}</FormErrorMessage>
-          </FormControl>
-        )}
-      </Field>
-    );
-  }
+  import { ChakraUIFormField } from "../components/chakra-ui-form-field/ChakraUIFormField";
   
   function FormikWrappeable({ setValues, validateRequired }) {
     useEffect(() => {
@@ -64,7 +45,7 @@ import {
     }
   
     function handleSubmit(values) {
-      window.electron.setAWSCredentials(values);
+      // window.electron.setAWSCredentials(values);
       toast({
         title: "Credenciales actualizadas",
         status: "success",
