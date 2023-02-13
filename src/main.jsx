@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPage from "./error-page";
-import { ChakraProvider } from '@chakra-ui/react'
+import { ChakraProvider } from "@chakra-ui/react";
 import UploadPhotos from "./routes/UploadPhotos";
 import Root from "./routes/Root";
 import AWSCredentials from "./routes/AWSCredentials";
@@ -21,18 +21,18 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: '',
-        element: <Root />
+        path: "",
+        element: <Root />,
       },
       {
         path: appRoutes.uploadPhotos,
-        element: <UploadPhotos />
+        element: <UploadPhotos />,
       },
       {
         path: appRoutes.awsCredentials,
-        element: <AWSCredentials />
-      }
-    ]
+        element: <AWSCredentials />,
+      },
+    ],
   },
 ]);
 
