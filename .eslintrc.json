@@ -13,6 +13,7 @@
   "rules": {
     "react/react-in-jsx-scope": "off",
     "prefer-promise-reject-errors": "off",
-    "camelcase": "off"
+    "camelcase": "off",
+    "no-unused-vars": "off"
   }
 }
