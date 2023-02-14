@@ -7,14 +7,20 @@ import { ChakraProvider } from "@chakra-ui/react";
 import UploadPhotos from "./routes/UploadPhotos";
 import Root from "./routes/Root";
 import AWSCredentials from "./routes/AWSCredentials";
+import Login from "./routes/Login";
 
 export const appRoutes = {
   root: "/",
   uploadPhotos: "uploadPhotos",
   awsCredentials: "awsCredentials",
+  login: "login",
 };
 
 const router = createBrowserRouter([
+  {
+    path: appRoutes.login,
+    element: <Login />,
+  },
   {
     path: appRoutes.root,
     element: <App />,

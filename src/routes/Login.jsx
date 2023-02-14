@@ -1,10 +1,11 @@
-import { Button, Flex, useToast, Center, Spacer } from "@chakra-ui/react";
+import { Button, Flex, useToast, Center, Heading } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
 import { Send as Feather_Icon_Send } from "react-feather";
 import { useEffect } from "react";
 import { ChakraUIFormField } from "../components/chakra-ui-form-field/ChakraUIFormField";
-import { Heading } from "@chakra-ui/react";
 import * as awsCognitoService from "../services/aws.cognito.service";
+import { appRoutes } from "../main";
+import { useNavigate } from "react-router-dom";
 
 function FormikWrappeable({ setValues, validateRequired }) {
   useEffect(() => {
@@ -36,8 +37,9 @@ function FormikWrappeable({ setValues, validateRequired }) {
   );
 }
 
-export default function Login({ handleLogin }) {
+export default function Login() {
   const toast = useToast();
+  const navigate = useNavigate();
 
   function validateRequired(value) {
     let error;
@@ -48,8 +50,11 @@ export default function Login({ handleLogin }) {
   }
 
   async function handleSubmit(values) {
-    console.log('been here');
-    handleLogin();
+    const res = await awsCognitoService.fakeAuth(values);
+    localStorage.setItem("access_token", res.data.token);
+    localStorage.setItem("expires_in", res.data.expiresIn);
+    localStorage.setItem("login_date", JSON.stringify(new Date()));
+    navigate(appRoutes.root);
   }
 
   return (

@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import MenuDrawer from "./components/menu-drawer/MenuDrawer";
 import UserDrawer from "./components/user-drawer/UserDrawer";
+import useAuth from "./hooks/useAuth";
 
 function startUp() {
   // TODO Verificar que esten las credenciales cargadas
@@ -10,6 +11,7 @@ function startUp() {
 
 export default function App() {
   const toast = useToast();
+  useAuth();
   useEffect(() => startUp(), []);
   return (
     <>
