@@ -12,7 +12,8 @@ import Login from "./routes/Login";
 export const appRoutes = {
   root: "/",
   uploadPhotos: "uploadPhotos",
-  awsCredentials: "awsCredentials"
+  awsCredentials: "awsCredentials",
+  login: "login",
 };
 
 const router = createBrowserRouter([

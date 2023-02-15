@@ -1,12 +1,4 @@
-import {
-  S3Client,
-  CreateMultipartUploadCommand,
-  UploadPartCommand,
-  CompleteMultipartUploadCommand,
-  PutObjectCommand,
-} from "@aws-sdk/client-s3"; // ES Modules
-
-// a client can be shared by different commands.
+import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 const client = new S3Client({
   region: "sa-east-1",
   credentials: {

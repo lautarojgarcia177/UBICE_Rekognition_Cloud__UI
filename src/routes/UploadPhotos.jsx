@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import DropFileInput from "../components/drop-file-input/DropFileInput";
 import { Image } from "react-feather";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import * as awsS3Service from "../services/aws.s3.service";
 
 export default function UploadPhotos() {
@@ -76,6 +76,7 @@ export default function UploadPhotos() {
       isClosable: true,
     });
     setIsLoading(false);
+    setStateFiles([]);
   }
 
   const jsx = (

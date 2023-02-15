@@ -11,7 +11,6 @@ function startUp() {
 
 export default function App() {
   const toast = useToast();
-  useAuth();
   useEffect(() => startUp(), []);
   return (
     <>
