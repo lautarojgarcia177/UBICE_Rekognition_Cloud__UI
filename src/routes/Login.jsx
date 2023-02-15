@@ -3,7 +3,6 @@ import { Form, Formik } from "formik";
 import { Send as Feather_Icon_Send } from "react-feather";
 import { useEffect } from "react";
 import { ChakraUIFormField } from "../components/chakra-ui-form-field/ChakraUIFormField";
-import * as awsCognitoService from "../services/aws.cognito.service";
 import { appRoutes } from "../main";
 import { useNavigate } from "react-router-dom";
 
@@ -50,10 +49,10 @@ export default function Login() {
   }
 
   async function handleSubmit(values) {
-    const res = await awsCognitoService.fakeAuth(values);
-    localStorage.setItem("access_token", res.data.token);
-    localStorage.setItem("expires_in", res.data.expiresIn);
-    localStorage.setItem("login_date", JSON.stringify(new Date()));
+    // const res = await awsCognitoService.fakeAuth(values);
+    // localStorage.setItem("access_token", res.data.token);
+    // localStorage.setItem("expires_in", res.data.expiresIn);
+    // localStorage.setItem("login_date", JSON.stringify(new Date()));
     navigate(appRoutes.root);
   }
 

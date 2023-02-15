@@ -45,7 +45,6 @@ import {
     }
   
     function handleSubmit(values) {
-      // window.electron.setAWSCredentials(values);
       toast({
         title: "Credenciales actualizadas",
         status: "success",

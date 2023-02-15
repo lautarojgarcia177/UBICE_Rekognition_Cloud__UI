@@ -5,13 +5,18 @@ import {
   ListIcon,
   ListItem,
   VStack,
+  Spinner,
+  useToast,
 } from "@chakra-ui/react";
 import DropFileInput from "../components/drop-file-input/DropFileInput";
 import { Image } from "react-feather";
 import { useEffect, useState } from "react";
+import * as awsS3Service from "../services/aws.s3.service";
 
 export default function UploadPhotos() {
   const [stateFiles, setStateFiles] = useState([]);
+  const [loading, setIsLoading] = useState(false);
+  const toast = useToast();
 
   function onFileInputChange(event) {
     const { files } = event.target;
@@ -27,21 +32,21 @@ export default function UploadPhotos() {
     const filesArray = Object.keys(files).map(function (key) {
       return files[key];
     });
-    const _files = [];
-    // Extract some props from files to make it serializable for storing in state
+    // const _files = [];
     // Filter by supported file type
     files = filesArray.filter(
       (file) => file.type === "image/jpeg" || file.type === "image/png"
     );
     for (let i = 0; i < files.length; i++) {
-      _files.push({
-        id: i,
-        name: files[i].name,
-        path: files[i].path,
-        numbers: [],
-      });
+      files[i].id = i;
+      // _files.push({
+      //   id: i,
+      //   name: files[i].name,
+      //   path: files[i].path,
+      //   numbers: [],
+      // });
     }
-    setStateFiles(_files);
+    setStateFiles(files);
   }
 
   const listFiles = stateFiles.map((file) => (
@@ -51,31 +56,49 @@ export default function UploadPhotos() {
     </ListItem>
   ));
 
-  function onUpload() {
-    console.log('been here');
+  async function onUpload() {
+    setIsLoading(true);
+    try {
+      const result = await awsS3Service.uploadPhotos(stateFiles);
+    } catch (error) {
+      toast({
+        title: "Ha habido un error subiendo las imagenes",
+        description: error,
+        status: "error",
+        duration: 6000,
+        isClosable: true,
+      });
+    }
+    toast({
+      title: "Las imagenes han sido subidas correctamente",
+      status: "success",
+      duration: 2000,
+      isClosable: true,
+    });
+    setIsLoading(false);
   }
 
-  return (
-    <VStack>
+  const jsx = (
+    <>
       <Container centerContent m={5} w="80%">
-        <h2 style={{ fontSize: "20px", marginBottom: "1rem" }}>
-          Subir fotos
-        </h2>
+        <h2 style={{ fontSize: "20px", marginBottom: "1rem" }}>Subir fotos</h2>
         <DropFileInput onFileInputChange={onFileInputChange} onDrop={onDrop} />
         <small style={{ marginTop: "0.5rem" }}>
           Haga click en la caja o arrastre las fotos al centro de la misma.
         </small>
       </Container>
-      {stateFiles.length && (
+      {stateFiles.length ?
         <>
           <Container maxHeight="600px" overflow="auto">
             <List>{listFiles}</List>
           </Container>
           <Button colorScheme="blue" onClick={onUpload}>
-            Upload
+            Subir
           </Button>
         </>
-      )}
-    </VStack>
+      : ""}
+    </>
   );
+
+  return <VStack>{loading ? <Spinner /> : jsx}</VStack>;
 }
