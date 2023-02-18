@@ -2,9 +2,8 @@ import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 const client = new S3Client({
   region: "sa-east-1",
   credentials: {
-    accessKeyId: "AKIAVE3CM52XZXIFVH53",
-    secretAccessKey: "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",
-  },
+    accessKeyId: "",
+    secretAccessKey: "",  },
 });
 
 const bucket = "ubicetest";
