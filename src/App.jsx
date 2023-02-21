@@ -1,6 +1,6 @@
 import { useToast, Flex, Spacer, Container } from "@chakra-ui/react";
 import { useEffect } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import MenuDrawer from "./components/menu-drawer/MenuDrawer";
 import UserDrawer from "./components/user-drawer/UserDrawer";
 import useAuth from "./hooks/useAuth";
@@ -12,6 +12,7 @@ function startUp() {
 export default function App() {
   const toast = useToast();
   useEffect(() => startUp(), []);
+  useAuth();
   return (
     <>
       <Flex>
